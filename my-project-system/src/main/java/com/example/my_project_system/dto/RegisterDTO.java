@@ -1,8 +1,9 @@
-package com.example.my_project_system.pojo;
+package com.example.my_project_system.dto;
 
 import lombok.Data;
+
 @Data
-public class LoginRequest {
+public class RegisterDTO {
     private String username;
     private String password;
 }

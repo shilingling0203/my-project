@@ -33,12 +33,18 @@ export default {
   methods: {
     login() {
       axios.post('/api/login', this.form).then(res => {
-        if (res.code === 200) {
+        console.log('后端返回：',res);
+              if (res.code === 200) {
           this.$message.success('登录成功')
           localStorage.setItem('token', res.data)
+          console.log('准备跳转/home');
+          this.$router.push('/home')
         } else {
-          this.$message.error(res.message)
+          this.$message.error(res.data.message)
         }
+      }).catch(err=>{
+        console.log('请求失败',err);
+        
       })
     }
   }

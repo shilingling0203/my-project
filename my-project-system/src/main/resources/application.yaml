@@ -1,6 +1,0 @@
-#spring:
-#  application:
-#    name: my-project-system
-
-server:
-  port: 8081

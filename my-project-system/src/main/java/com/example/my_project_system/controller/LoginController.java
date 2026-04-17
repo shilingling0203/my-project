@@ -1,7 +1,7 @@
 package com.example.my_project_system.controller;
 
-import com.example.my_project_system.pojo.LoginRequest;
-import com.example.my_project_system.pojo.Result;
+import com.example.my_project_system.dto.LoginDTO;
+import com.example.my_project_system.dto.Result;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 //@CrossOrigin(origins="http://localhost:8080")
 public class LoginController {
     @PostMapping("/login")
-    public Result<?>login(@RequestBody LoginRequest req){
+    public Result<?>login(@RequestBody LoginDTO req){
         if ("admin".equals(req.getUsername())&&"123456".equals(req.getPassword())){
             return Result.success("fake-jwt-token-admin");
         }

@@ -1,4 +1,4 @@
-package com.example.my_project_system.pojo;
+package com.example.my_project_system.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
