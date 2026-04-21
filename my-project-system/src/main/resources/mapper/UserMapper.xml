@@ -13,5 +13,17 @@
         INSERT INTO user(username, password)
         VALUES (#{username}, #{password})
     </insert>
+    <select id="selectByUsernameAndPassword" resultType="com.example.my_project_system.entity.User">
+        SELECT
+        id,
+        username,
+        password,
+        nickname,
+        dept_name AS deptName,
+        role_name AS roleName
+        FROM user
+        WHERE username = #{username}
+        AND password = #{password}
+    </select>
 
 </mapper>

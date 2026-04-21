@@ -10,5 +10,7 @@ public class User {
     private String username;
     private String password;
     private LocalDateTime createTime;
-
+    private String nickname;
+    private String deptName;
+    private String roleName;
 }
