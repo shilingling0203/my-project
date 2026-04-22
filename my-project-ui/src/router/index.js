@@ -11,33 +11,33 @@ const router = new VueRouter({
     {
       path: '/login',
       component: Login,
-      meta: { noAuth: true } // ✅ 标记为不需要登录
+       meta: { noAuth: true }
     },
     
     // 主布局（左右布局）
     {
-      path: '/',
+      path: '/home',
       component: () => import('@/views/Home.vue'),
       redirect: '/dashboard', // ✅ 默认跳转到 dashboard
       children: [
         {
-          path: 'dashboard',
+          path: '/dashboard',
           component: () => import('@/views/dashboard/index.vue')
         },
         {
-          path: 'sales',
+          path: '/sales',
           component: () => import('@/views/dashboard/index.vue')
         },
         {
-          path: 'purchase',
+          path: '/purchase',
           component: () => import('@/views/dashboard/index.vue')
         },
         {
-          path: 'system/user',
+          path: '/system/user',
           component: () => import('@/views/dashboard/index.vue')
         },
         {
-          path: 'system/role',
+          path: '/system/role',
           component: () => import('@/views/dashboard/index.vue')
         }
       ]
@@ -48,6 +48,7 @@ const router = new VueRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
+
   
   // ✅ 如果是登录页，直接放行
   if (to.meta.noAuth) {

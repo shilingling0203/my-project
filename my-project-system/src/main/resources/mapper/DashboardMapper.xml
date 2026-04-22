@@ -36,5 +36,18 @@
         FROM sys_user
         WHERE last_login_time &gt;= NOW() - INTERVAL 30 MINUTE
     </select>
+    <select id="selectTodayStats" resultType="com.example.my_project_system.entity.Dashboard">
+        SELECT
+        id,
+        stat_date AS statDate,
+        order_count AS orderCount,
+        sales_amount AS salesAmount,
+        stock_warning AS stockWarning,
+        pv,
+        user_name AS userName,
+        avatar
+        FROM vanta_dashboard
+        WHERE stat_date = CURDATE()
+    </select>
 
 </mapper>

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class DashboardServiceImpl implements DashboardService {
+public class DashboardServiceImpl  {
     @Autowired
     private DashboardMapper dashboardMapper;
 
@@ -23,7 +23,6 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
 
-    @Override
     public DashboardDTO getDashboardData() {
         DashboardDTO dto=new DashboardDTO();
 //        设置数据（空值保护）

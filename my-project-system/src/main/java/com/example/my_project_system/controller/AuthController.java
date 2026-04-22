@@ -3,6 +3,7 @@ package com.example.my_project_system.controller;
 import com.example.my_project_system.dto.LoginDTO;
 import com.example.my_project_system.dto.RegisterDTO;
 import com.example.my_project_system.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,4 +29,13 @@ public class AuthController {
         userService.register(dto);
         return Map.of("code",200,"msg","注册成功");
     }
+
+    @PostMapping("/logout")
+    public Map<String,Object> logout(HttpServletRequest request){
+        return Map.of(
+                "code",200,
+                "msg","退出成功"
+        );
+    }
+
 }

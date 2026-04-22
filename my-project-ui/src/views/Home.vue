@@ -69,7 +69,7 @@ export default {
 
 .main-container {
   flex: 1;
-  padding: 20px;
+  padding: 5px;
   overflow-y: auto;
   background: #f5f7fa;
 }

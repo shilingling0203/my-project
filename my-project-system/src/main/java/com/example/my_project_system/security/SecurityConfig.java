@@ -28,10 +28,13 @@ public class SecurityConfig {
 //                开启跨域
                 .cors(cors->cors.disable())
 //                请求权限配置
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                        .anyRequest().authenticated());
+                // 3️⃣ 放行所有请求（先通再收紧）
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/login").permitAll()
-                        .anyRequest().authenticated());
+                        .anyRequest().permitAll()
+                );
         return http.build();
     }
 }
