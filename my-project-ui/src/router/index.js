@@ -13,6 +13,11 @@ const router = new VueRouter({
       component: Login,
        meta: { noAuth: true }
     },
+    {
+      path:'/register',
+      component:()=>import('@/views/Register.vue'),
+      meta:{noAuth:true}
+    },
     
     // 主布局（左右布局）
     {

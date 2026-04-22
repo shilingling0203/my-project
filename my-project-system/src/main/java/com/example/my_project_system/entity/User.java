@@ -13,4 +13,9 @@ public class User {
     private String nickname;
     private String deptName;
     private String roleName;
+    private String phone;
+    private String email;
+    private Integer status;
+    private LocalDateTime updateTime;
+
 }

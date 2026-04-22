@@ -18,27 +18,45 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // ✅ 构造器注入（最稳）
+    public UserServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
     @Override
     public String login(LoginDTO dto){
-        User user=userMapper.findByUsername(dto.getUsername());
-        if (user==null){
-            throw new RuntimeException("用户不存在");
+        User user = userMapper.findByUsername(dto.getUsername());
+        if (user == null) {
+            throw new RuntimeException("用户名或密码错误");
         }
-        if (!passwordEncoder.matches(dto.getPassword(),user.getPassword())){
-            throw new RuntimeException("密码错误");
+
+        boolean matches = passwordEncoder.matches(
+                dto.getPassword(),
+                user.getPassword()
+        );
+
+        if (!matches) {
+            throw new RuntimeException("用户名或密码错误");
         }
-        return JwtUtil.generateToken(user.getUsername());
+
+        return "mock-jwt-token";
     }
 
     @Override
-    public void register(RegisterDTO dto){
-        User exit=userMapper.findByUsername(dto.getUsername());
-        if (exit!=null){
+    public String register(RegisterDTO dto){
+//        1.校验密码
+        if (!dto.getPassword().equals(dto.getConfirmPassword())){
+            throw new RuntimeException("两次密码不一致");
+        }
+//        2.校验用户名
+        if (userMapper.countByUsername(dto.getUsername())>0){
             throw new RuntimeException("用户名已存在");
         }
+//        3.保存用户
         User user=new User();
         user.setUsername(dto.getUsername());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
         userMapper.insert(user);
+        return "注册成功";
     }
 }

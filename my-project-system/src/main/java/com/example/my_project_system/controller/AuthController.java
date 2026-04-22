@@ -2,8 +2,10 @@ package com.example.my_project_system.controller;
 
 import com.example.my_project_system.dto.LoginDTO;
 import com.example.my_project_system.dto.RegisterDTO;
+import com.example.my_project_system.dto.Result;
 import com.example.my_project_system.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -19,15 +22,15 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Map<String,Object> login(@RequestBody LoginDTO dto){
-        String token=userService.login(dto);
-        return Map.of("code",200,"token",token);
+    public Result<String> login(@RequestBody LoginDTO loginDTO) {
+        String token = userService.login(loginDTO);
+        return Result.success(token);
     }
 
     @PostMapping("/register")
-    public Map<String,Object> register(@RequestBody RegisterDTO dto){
-        userService.register(dto);
-        return Map.of("code",200,"msg","注册成功");
+    public Result<String> register(@RequestBody RegisterDTO registerDTO) {
+        String msg = userService.register(registerDTO);
+        return Result.success(msg);
     }
 
     @PostMapping("/logout")

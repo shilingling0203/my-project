@@ -11,6 +11,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login">登录</el-button>
+          <el-button type="primary" @click="register">注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -32,20 +33,24 @@ export default {
   },
   methods: {
     login() {
-      axios.post('/api/login', this.form).then(res => {
-        console.log('后端返回：',res);
+      axios.post('/api/auth/login', this.form).then(res => {
+        console.log('后端返回：',res.data);
               if (res.code === 200) {
           this.$message.success('登录成功')
-          localStorage.setItem('token', res.data)
+          localStorage.setItem('token', res.data.data)
           console.log('准备跳转/home');
           this.$router.push('/home')
         } else {
           this.$message.error(res.data.message)
         }
       }).catch(err=>{
+        this.$message.error('登录失败！')
         console.log('请求失败',err);
         
       })
+    },
+    register(){
+      this.$router.push('/register')
     }
   }
 }
